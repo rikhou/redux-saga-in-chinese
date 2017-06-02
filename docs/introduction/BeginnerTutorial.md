@@ -68,8 +68,9 @@ import { helloSaga } from './sagas'
 
 const store = createStore(
   reducer,
-  applyMiddleware(createSagaMiddleware(helloSaga))
+  applyMiddleware(sagaMiddleware)
 )
+
 
 // rest unchanged
 ```
