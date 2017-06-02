@@ -66,10 +66,34 @@ import createSagaMiddleware from 'redux-saga'
 //...
 import { helloSaga } from './sagas'
 
+const sagaMiddleware=createSagaMiddleware(helloSaga);
+
 const store = createStore(
   reducer,
-  applyMiddleware(createSagaMiddleware(helloSaga))
+  applyMiddleware(sagaMiddleware)
 )
+
+- 以 Sagas 列表创建一个 Saga middleware（目前我们只有一个 `helloSaga`）
+- 将这个 Saga middleware 连接至 Redux store.
+
+我们修改一下 `main.js`：
+
+```javascript
+// ...
+import { createStore, applyMiddleware } from 'redux'
+import createSagaMiddleware from 'redux-saga'
+
+//...
+import { helloSaga } from './sagas'
+
+const sagaMiddleware=createSagaMiddleware(helloSaga);
+
+const store = createStore(
+  reducer,
+  applyMiddleware(sagaMiddleware)
+)
+
+sagaMiddleware.run(helloSaga)
 
 // rest unchanged
 ```
